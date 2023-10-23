@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import  Navbar  from '@/components/Navbar'
 import {lobster, logo} from '../fonts/font'
+import "slick-carousel/slick/slick.css"; 
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${lobster.variable} ${logo.variable}`}>
+      <body className={`${lobster.variable} ${logo.variable} bg-gray-100`}>
         <Navbar/>
         {children}
         </body>

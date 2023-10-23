@@ -18,7 +18,7 @@ const config: Config = {
 
     maxWidth:{
       container: '1520px',
-      contentContainer: '1280px',
+      contentContainer: '880px',
     },
 
     screens:{
