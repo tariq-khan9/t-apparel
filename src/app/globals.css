@@ -1,0 +1,18 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .navHover {@apply px-5 py-1   rounded-full bg-transparent hover:text-white flex items-center gap-2 hover:bg-fuchsia-900 duration-300 cursor-pointer;
+   }  
+
+   .fontLobster {
+    font-family: var(--lobster-font);
+   }
+
+   .fontLogo {
+    font-family: var(--logo-font);
+   }
+}
+
