@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${lobster.variable} ${logo.variable} bg-gray-100`}>
+      <body className={`${lobster.variable} ${logo.variable} bg-gray-200`}>
         <Navbar/>
         {children}
         </body>

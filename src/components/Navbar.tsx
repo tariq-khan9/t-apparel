@@ -60,7 +60,7 @@ const Navbar = () => {
         </div>
       
 
-        <div className="basis-1/3 md:basis-1/4 mdl:pl-8 lgl:pl-12 flex flex-row ">
+        <div className="basis-1/3 md:basis-1/4 pr-4 flex flex-row justify-end">
                 <div className=" flex flex-row relative ">
                     <div className="w-[30px]  pt-2 ">
                         <Image height={25} width={25} src={cart} alt="cart"/>
@@ -71,7 +71,7 @@ const Navbar = () => {
                     </div>
                     <span className=" absolute w-4 h-4 top-0 pl-[2px] left-[18px] items-center justify-center rounded-full bg-yellow-500 text-[10px] ">05</span>
                     
-                </div>
+                </div> 
                 <div className="pt-2 pl-3 sm:pl-10 mdl:pl-8 lgl:pl-12 pr-4">
                   <Link href='account'><p>Account</p></Link>
                 </div>

@@ -8,7 +8,9 @@ import banner2 from './banner/banner2.jpg'
 import banner3 from './banner/banner3.jpg'
 import banner4 from './banner/banner4.jpg'
 import banner5 from './banner/banner5.jpg'
-
+import arrowright from './banner/arrow-right.png'
+import arrowleft from './banner/arrow-left.png'
+import sale from './banner/sale.jpg'
 
 
 export {
@@ -21,5 +23,8 @@ export {
     banner3,
     banner4,
     banner5,
+    arrowright,
+    arrowleft,
+    sale
 
 };
