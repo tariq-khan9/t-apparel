@@ -12,6 +12,8 @@ import arrowright from './banner/arrow-right.png'
 import arrowleft from './banner/arrow-left.png'
 import sale from './banner/sale.jpg'
 
+import addproduct from './product/addproduct.png'
+
 
 export {
     close,
@@ -25,6 +27,7 @@ export {
     banner5,
     arrowright,
     arrowleft,
-    sale
+    sale,
+    addproduct
 
 };

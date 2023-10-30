@@ -6,7 +6,35 @@
 @layer components {
     .navHover {@apply px-5 py-1   rounded-full bg-transparent hover:text-white flex items-center gap-2 hover:bg-fuchsia-900 duration-300 cursor-pointer;
    }  
+ 
+    .addProductLabel {@apply hidden mdl:flex  tracking-wide text-gray-600 text-xs  font-bold  mb-1 }
 
+    .addProductInput {@apply  flex w-full text-xs bg-gray-200 text-gray-700 border-2 border-gray-200 rounded-md  mb-3 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-fuchsia-900}
+
+    .addProductInputFile {@apply block w-full file:px-1 file:text-white file:px-4 file:bg-fuchsia-900 file:py-1 text-sm  rounded-full file:cursor-pointer file:hover:bg-fuchsia-600 file:border-none bg-gray-200  }
+
+    .addProductImageButton {@apply bg-fuchsia-900 hover:bg-fuchsia-700 text-sm text-white font-semibold rounded-full px-2 mb-4  mdl:px-4 py-1 }
+    
+
+    
+
+
+    .formTitle {
+        background: rgb(255, 255, 255);
+        color: lighten(rgb(61, 12, 130), 10%);
+        text-shadow: 0 0 1em rgba(0,0,0,0.9);
+      }
+
+      .formBoxShadow {
+        background: #525252;
+        color: lighten(rgb(90, 5, 121), 10%);
+        box-shadow: 0 0 0.5em rgba(0,0,0,0.9);
+      }
+
+
+
+
+   /********************** FONTS ****************************/
    .fontLobster {
     font-family: var(--lobster-font);
    }
