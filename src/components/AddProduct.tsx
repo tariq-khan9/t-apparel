@@ -6,7 +6,9 @@ import { db, storage} from '@/firebase';
 import {  ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Image from 'next/image';
 import { resolve } from 'path';
-import { setTimeout } from 'timers';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Slide } from '../../node_modules/react-toastify/dist/index';
 
 
 
@@ -81,10 +83,11 @@ const AddProduct = () => {
 
    const handleImageUpload = (e:any) => {
        e.preventDefault();
-        //////////////////////////// image upload and saving code here//////////////////////////////
       
-       const name = new Date().getTime() + 'Product'
-                const storageRef = ref(storage, name)
+        //////////////////////////// image upload and saving code here//////////////////////////////
+      if(title && price && brand && desc && preview){
+        const name = new Date().getTime() + 'Product'
+        const storageRef = ref(storage, name)
 
         const uploadTask =  uploadBytesResumable(storageRef, image);
             uploadTask.on('state_changed', 
@@ -108,8 +111,9 @@ const AddProduct = () => {
                 getDownloadURL(uploadTask.snapshot.ref).then( (downloadURL) => {
 
                     const promise = new Promise(function(resolve) {
-                       resolve(setImageLink(downloadURL))
-                       }).then(async()=>{
+                    resolve(setImageLink(downloadURL))
+                    }).then(async()=>{
+                        //if(imageLink){
                                 try {
                                     const docRef = await addDoc(collection(db, "products"), {
                                     title,
@@ -125,12 +129,19 @@ const AddProduct = () => {
                                 } catch (e) {
                                     console.error("Error adding document: ", e);
                                 }  
+                            // }else{
+                            //     console.log("upload image")
+                            // }
                             
-                       });
+                    });
 
-           });
-           }
-        );
+                    });
+                    }
+                    );
+      }else{
+        toast.error("Please fill all fields and upload image.");
+      }
+     
     }
 
    
@@ -174,7 +185,7 @@ const AddProduct = () => {
 
                         <div className=''> 
                                 <label className="addProductLabel pt-4" > Title </label>
-                                <input className="addProductInput " id="title" type="text" placeholder="Title"/>
+                                <input className="addProductInput " id="title" type="text" placeholder="Title" onChange={e=>setTitle(e.target.value)}/>
                         </div> 
 
                         <div className=''>
@@ -254,7 +265,7 @@ const AddProduct = () => {
                         
                             <div className=''> 
                                 <label className="hidden w-full md:flex  tracking-wide text-gray-600 text-xs  font-bold   mb-1" > Description </label>
-                                <textarea rows={6} className="flex w-full  text-xs pt-3 bg-gray-200 text-gray-700 border-2 border-gray-200 rounded-md py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-fuchsia-900" id="title"  placeholder="description"/>
+                                <textarea rows={6} className="flex w-full  text-xs pt-3 bg-gray-200 text-gray-700 border-2 border-gray-200 rounded-md py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-fuchsia-900" id="title"  placeholder="description" onChange={e=>setDesc(e.target.value)}/>
                             </div>     
                             
                         </div>
@@ -267,6 +278,14 @@ const AddProduct = () => {
                 <button disabled={perc>0 && perc<100} type='submit' className='mt-4 fontLobster bg-fuchsia-900 w-48 py-2 rounded-full  text-white hover:bg-fuchsia-700 formBoxShadow'>{(perc>0 && perc<100)? `Uploading image...${Math.floor(perc)}%` : 'Add Product'}</button> 
             </div>
          </form>
+         <ToastContainer position= "top-center"
+        autoClose= {2000} 
+        hideProgressBar= {false}
+        closeOnClick= {true}
+        pauseOnHover= {true}
+        draggable= {true}
+        
+        theme= "light" />
     </div>
   )
 }
