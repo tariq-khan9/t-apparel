@@ -19,6 +19,33 @@ const AllProducts = () => {
 
   },[image])
 
+  // Assuming these are your two functions
+async function firstFunction() {
+  // Simulate an asynchronous task, for example, fetching data
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  console.log('First function has completed');
+}
+
+async function secondFunction() {
+  // Simulate another asynchronous task
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  console.log('Second function has completed');
+}
+
+// You want to run secondFunction after firstFunction is completed.
+async function runFunctionsInSequence() {
+  try {
+    await firstFunction(); // Wait for the first function to complete
+    await secondFunction(); // Then, run the second function
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+}
+
+// Call the function to start the sequence
+
+
+
   return (
     <div>
        <form className='p-10'> 
@@ -54,6 +81,7 @@ const AllProducts = () => {
           }}
         />
        </form>
+       <button onClick={runFunctionsInSequence}>Run this</button>
     </div>
   )
 }

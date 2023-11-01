@@ -5,6 +5,8 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db, storage} from '@/firebase';
 import {  ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Image from 'next/image';
+import { resolve } from 'path';
+import { setTimeout } from 'timers';
 
 
 
@@ -102,19 +104,39 @@ const AddProduct = () => {
             (error) => {
                 console.log(error)
             }, 
-             () => {
-                 getDownloadURL(uploadTask.snapshot.ref).then( (downloadURL) => {
-                 setImageLink(downloadURL) 
-                 console.log(image)    
-            });
-            }
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then( (downloadURL) => {
+
+                    const promise = new Promise(function(resolve) {
+                       resolve(setImageLink(downloadURL))
+                       }).then(async()=>{
+                                try {
+                                    const docRef = await addDoc(collection(db, "products"), {
+                                    title,
+                                    price,
+                                    category,
+                                    brand,
+                                    isNew,
+                                    desc,
+                                    imageLink,
+                                    timeStamp: serverTimestamp()           
+                                    });
+                                    console.log("Document written with ID: ", docRef.id);
+                                } catch (e) {
+                                    console.error("Error adding document: ", e);
+                                }  
+                            
+                       });
+
+           });
+           }
         );
-   }
+    }
 
    
 
-    const handleSubmit = async(e: any) => {
-        e.preventDefault()
+    const handleSubmit = async() => {
+       
         
         try {
             const docRef = await addDoc(collection(db, "products"), {
@@ -133,6 +155,8 @@ const AddProduct = () => {
         }  
     }
 
+ 
+
    
 
   return (
@@ -142,7 +166,7 @@ const AddProduct = () => {
             <p className='text-2xl tracking-[2px] formTitle font-bold fontLobster text-fuchsia-900'>Add  Product</p>
         </div>
         
-         <form onSubmit={handleSubmit}  className='p-2 flex flex-col' >
+         <form onSubmit={handleImageUpload}  className='p-2 flex flex-col' >
                 <div className='flex flex-col  mdl:flex-row gap-2'>
 
     {/* /////////////////////      first portion of form from "title" to "New"    /////////////////////////  */}
